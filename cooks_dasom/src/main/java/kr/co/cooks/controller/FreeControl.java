@@ -100,4 +100,14 @@ public class FreeControl {
 		return mav;
 	}
 	
+	//조회수 추가
+	@RequestMapping(value="/FreeHit.app")
+	public ModelAndView freeHit(int free_Num) {
+		ModelAndView mav = new ModelAndView();
+			
+		freeService.freeHit(free_Num);
+		mav.setViewName("JSON");
+		return mav ; 	
+							
+	}
 }

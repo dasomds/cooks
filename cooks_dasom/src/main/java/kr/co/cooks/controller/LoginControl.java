@@ -1,7 +1,5 @@
 package kr.co.cooks.controller;
 
-import java.util.HashMap;
-
 import javax.servlet.http.HttpSession;
 
 import kr.co.cooks.service.UserService;
@@ -12,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -36,26 +34,60 @@ public class LoginControl {
 	}
 	
 	
-	@RequestMapping(value = "/login.app")
-	public Object login(@RequestParam String email, String password, HttpSession session, String requestUrl) {
+	@RequestMapping(value = "/login.app", method=RequestMethod.POST)
+	public ModelAndView login(String email, String password, HttpSession session) {
 
-		System.out.println("이메일 : " +email);
-		System.out.println("비밀번호 : " +password);
-
+		ModelAndView mav = new ModelAndView();
+		
 		userVO = userService.validation_Check(email, password);
 		
-		HashMap<String, Object> resultMap = new HashMap<>();
-
 		if(userVO != null) {
 			session.setAttribute("loginUser", userVO);
-			resultMap.put("status", "success");
+			mav.addObject("status", "success");
 			
 		} else {
 			session.invalidate();
-			resultMap.put("status", "fail");
+			mav.addObject("status", "fail");
 		}
-
-		return resultMap;
+		
+		mav.setViewName("JSON");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/loginUser.app")
+	public ModelAndView loginUser(HttpSession session) {
+		
+		
+		System.out.println("session 정보 : " +session.getAttribute("loginUser"));
+		
+		ModelAndView mav = new ModelAndView();
+		
+		if(session.getAttribute("loginUser") != null) {
+			mav.addObject("status", "success");
+			mav.addObject("loginUser", session.getAttribute("loginUser"));
+			
+		} else {
+			mav.addObject("status", "fail");
+		}
+		
+		mav.setViewName("JSON");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/logoutUser.app")
+	public ModelAndView logoutUser(HttpSession session) {
+		
+		session.invalidate(); // session 끊어주는 메서드.
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("status", "success");
+		mav.setViewName("JSON");
+		
+		return mav;
+		
 	}
 
 	

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.cooks.dao.FreeCommentDao">
+
+	<insert id="freeCommentWrite" parameterType="freecomment">
+		insert into free_comments values(freecomment_seq.NEXTVAL, #{id}, #{fcomment_Content}, sysdate, #{free_Num})
+	</insert>
+	
+	<select id="freeCommentRead" parameterType="HashMap" resultType="freecomment">
+		select * from (select rownum rm, human.* from 
+		(select * from free_comments where free_Num=#{free_Num}
+		order by fcomment_Num) human) 
+		where rm between 1 and #{endRow}
+	</select>
+</mapper>

@@ -33,4 +33,11 @@
 		delete from f_board where free_Num=#{free_Num}
 	</delete>
 	
+	<select id="getFreeCommentCount" parameterType="Integer" resultType="Integer">
+		select count(*) from free_comments where free_Num=#{free_Num}
+	</select>
+	
+	<update id="freeHit" parameterType="Integer">
+		update f_board set free_Hit=free_Hit+1 where free_Num=#{free_Num}
+	</update>
 </mapper>

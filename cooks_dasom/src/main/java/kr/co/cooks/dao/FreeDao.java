@@ -3,6 +3,7 @@ package kr.co.cooks.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import kr.co.cooks.vo.FreeCommentVO;
 import kr.co.cooks.vo.FreeVO;
 
 public interface FreeDao {
@@ -17,4 +18,14 @@ public interface FreeDao {
 	public void updateFree(FreeVO freeVO);
 	
 	public void deleteFree(int free_Num);
+	
+	//댓글 개수 가져오기
+	public int getFreeCommentCount(int free_Num);
+	
+	//댓글 리스트 가져오기
+	public List<FreeCommentVO> getFreeCommentList(HashMap<String, Integer> rowHashMap);
+	
+	//조회수
+	public void freeHit(int free_Num);
+	
 }

@@ -24,5 +24,14 @@ public class UserService {
 		return userDao.existUser(params);
 		
 	}
+	
+	public void signUpUser(UserVO userVO) {
+		
+		userDao.signUpUser(userVO);
+	}
 
+	public void userUpdate(UserVO userVO) {
+		
+		userDao.userUpdate(userVO);
+	}
 }

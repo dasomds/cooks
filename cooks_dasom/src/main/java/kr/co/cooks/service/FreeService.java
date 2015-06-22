@@ -70,6 +70,7 @@ public class FreeService {
 	}
 	
 	public FreeVO freecontent(int free_Num){
+//		freeDao.freeHit(freeVO);
 		return freeVO = freeDao.freecontent(free_Num);
 	}
 	
@@ -78,11 +79,20 @@ public class FreeService {
 	}
 	
 	public void updateFree(FreeVO freeVO){
+//		freeDao.freeHit(freeVO);
 		freeDao.updateFree(freeVO);
 	}
 	
 	public void freedelete(int free_Num){
 		freeDao.deleteFree(free_Num);
+	}
+	
+	public int getFreeCommentCount(int free_Num){
+		return freeDao.getFreeCommentCount(free_Num);
+	}
+	
+	public void freeHit(int free_Num){
+		freeDao.freeHit(free_Num);
 	}
 	
 }

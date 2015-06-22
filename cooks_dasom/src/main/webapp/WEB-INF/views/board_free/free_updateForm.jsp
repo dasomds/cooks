@@ -18,113 +18,38 @@
 
     <!-- Custom CSS -->
     <link href="community/css/shop-homepage.css" rel="stylesheet">
-    
+    <link href='common/css/modalStyle.css' rel='stylesheet'>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    
-     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-    <script src="common/js/common.js"></script>
-    <script src="community/js/community.js"></script>
-
+    <!-- jQuery -->
+    <script src="js/jquery-1.11.1.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-    
+	<!-- Custom JS -->
+    <script src="common/js/common.js"></script>
+    <script src="common/js/signUp.js"></script>
+    <script src="common/js/common.js"></script>
+    <script src="community/js/community.js"></script>
 </head>
 
 
 <body>
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
-        <div class="container topnav">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand topnav" href="#">Cook's</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                	<li><a><span class="glyphicon glyphicon-log-in" data-toggle="modal" data-target="#signIn"> 로그인</span></a></li>
-        			<li><a><span class="glyphicon glyphicon-user"  data-toggle="modal" data-target="#signUp"> 회원가입</span></a></li>
-        			<li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> 장바구니</a></li>
-      			</ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-
-<!--     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"> -->
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-<!--                 <a class="navbar-brand" href="#">Start Bootstrap</a> -->
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">1인메뉴</a>
-                    </li>
-                    <li>
-                        <a href="#">맛집</a>
-                    </li>
-                    <li>
-                        <a href="#">커뮤니티</a>
-                    </li>
-                    <li>
-                        <a href="#">공지사항</a>
-                    </li>
-                    <li>
-                        <a href="#">음식후기</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-<!--     </nav> -->
-    </nav>
+<jsp:include page="../common/navTop.jsp"/>
 
     <!-- Page Content -->
-    <div class="container">
-
-        <div class="row">
-        
-        <div class="row row-offcanvas row-offcanvas-left">
-
+	<div class="container">
+		<div class="row">
+			<div class="row row-offcanvas row-offcanvas-left">
 				<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar"
 					role="navigation">
 
 					<ul class="nav nav-sidebar" style="margin-top: 15px;">
 						<li><a href="#">자유게시판</a></li>
-						<li><a href="#">나만 아는 레시피</a></li>
-						<li><a href="#">공지사항</a></li>
+						<li class="active"><a href="#">자유게시판</a></li>
 					</ul>
 
 				</div>
-				<!--/span-->
 
 				<div class="col-sm-9 col-md-10 main">
-
-					<!--toggle sidebar button-->
 					<p class="visible-xs">
 						<button type="button" class="btn btn-primary btn-xs"
 							data-toggle="offcanvas">
@@ -133,67 +58,61 @@
 					</p>
 
 					<h2 class="sub-header">자유게시판</h2>
-					<input type="hidden" name="pageNum" value="%{pageNum}">
-					<div class="table-responsive">
-<!-- 						<form action="/cooks/FreeWrite.app" method="post"> -->
+
+					<br>
+
+					<div class="well bs-component">
+
+						<form class="form-horizontal" action="FreeUpdate.app" method="post">
+						<input type="hidden" name="free_Num" value="${freeVO.free_Num}">
+						<input type="hidden" name="pageNum" value="${pageNum}">
 							<div class="form-group">
-								<label for="exampleInputEmail1">아이디</label> 
-								${id}
-							</div>
-							<div class="form-group">
-								<label for="exampleInputEmail1">제 목</label> 
-								<input type="text" name="free_Title" value="${freeVO.free_Title}">
+								<label for="id">글쓴이 : </label> ${loginUser.name}
+								<hr>
+								<!--  <input type="text" class="form-control" id="recipt_title" placeholder="제목을 입력하세요"> -->
 							</div>
 
 							<div class="form-group">
-								<label for="exampleInputEmail1">내 용</label>
-								<textarea class="form-control" rows="3" cols="7"
-									id="free_Content" name="free_Content">${freeVO.free_Content}</textarea>
+								<label for="free_Title">제 목</label> 
+								<input type="text" name="free_Title" class="form-control" value="${freeVO.free_Title}">
 							</div>
 
-							<div>
-								<input type="submit" value="수정하기"> 
-								<input type="reset" value="수정취소">
+							<div class="form-group">
+								<label for="free_Content">내 용</label>
+								<textarea name="free_Content" class="form-control" rows="10" cols="7">${freeVO.free_Content}</textarea>
 							</div>
-<!-- 						</form> -->
+							<br>
+
+							<div class="form-group">
+								<button type="button" class="btn btn-default col-sm-1">취소</button>
+								<button type="submit" class="btn btn-primary col-sm-1">수정하기</button>
+							</div>
+
+						</form>
 					</div>
-				<!--/row-->
+
+				</div>
 			</div>
 
-		</div> <!-- row -->
-	</div> <!-- /container -->
+		</div>
+		<!--/row-->
+	</div>
+	<!--/.container-->
 
-
+	<!-- Footer -->
 	<div class="container">
+		<hr>
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>Copyright &copy; Get Hyped for Food</p>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<!-- /.container -->
 
-        <hr>
-
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Get Hyped for Food</p>
-                </div>
-            </div>
-        </footer>
-
-    </div>
-    <!-- /.container -->
-    
-  	<div id="sign_Modal"></div>
-<!--   	<div id="writeForm_Modal"></div>   -->
-    
+	<jsp:include page="../common/sign_modal.jsp"/>
 </body>
+
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
