@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.cooks.dao.FreeDao">
+<!-- 	<select id="getListCount" resultType="Integer"> -->
+<!-- 		select count(*) from f_board -->
+<!-- 	</select> -->
+	
+	<select id="getfreeList" parameterType="HashMap" resultType="freeVO">
+		select *
+		from (select rownum rm,human.* from
+		(select free_num, id, free_title, free_date, free_hit from f_board order by free_num)human)
+		where rm between #{startRow} and #{endRow}
+	</select>
+	<insert id="freewrite" parameterType="freeVO" >
+		insert into f_board values(fboard_seq.nextval,#{id},#{free_Title},#{free_Content},sysdate,0)
+	</insert>
+	
+	<select id="freecontent" parameterType="Integer" resultType="freeVO">
+		select * from f_board where free_Num=#{free_Num}
+	</select>
+	
+	<select id="getUpdateFree" parameterType="Integer" resultType="freeVO">
+		select free_Num, free_Title, free_Content from f_board where free_Num=#{free_Num} 
+	</select>
+	
+	<update id="updateFree" parameterType="freeVO">
+		update f_board set free_Title=#{free_Title}, free_Content=#{free_Content} where free_Num=#{free_Num}
+	</update>
+	
+	<delete id="deleteFree" parameterType="Integer">
+		delete from f_board where free_Num=#{free_Num}
+	</delete>
+	
+</mapper>
