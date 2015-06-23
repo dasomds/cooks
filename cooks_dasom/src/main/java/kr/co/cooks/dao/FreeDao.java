@@ -10,7 +10,7 @@ public interface FreeDao {
 //	public int getListCount();
 	public List<FreeVO> getfreeList(HashMap<String, Integer> paging);
 	
-	public void freewrite(FreeVO freeVO);
+	public void freewrite(HashMap<String, Object> params );
 	
 	public FreeVO freecontent(int freeNum);
 	

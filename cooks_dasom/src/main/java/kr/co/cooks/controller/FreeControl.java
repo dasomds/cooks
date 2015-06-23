@@ -43,10 +43,10 @@ public class FreeControl {
 	}
 	
 	@RequestMapping(value="/FreeWrite.app")
-	public String freewrite(@ModelAttribute FreeVO freeVO){
-//		freeVO.setId((String)session.getAttribute("id"));
-		System.out.println(" " + freeVO);
-		freeService.freewrite(freeVO);
+	public String freewrite(@ModelAttribute FreeVO freeVO, HttpSession session, @RequestParam String userId){
+		freeVO.setId((String)session.getAttribute("id"));
+//		System.out.println(" " + freeVO);
+		freeService.freewrite(freeVO, userId);
 		return "redirect:/FreeList.app?pageNum="+1;
 	}
 	
@@ -91,7 +91,7 @@ public class FreeControl {
 		return mav;
 	}
 	
-	@RequestMapping(value="/Freedelete.app")
+	@RequestMapping(value="/FreeDelete.app")
 	public ModelAndView freedelete(@RequestParam String pageNum, @RequestParam int free_Num){
 		ModelAndView mav = new ModelAndView();
 		freeService.freedelete(free_Num);

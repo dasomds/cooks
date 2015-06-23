@@ -4,14 +4,16 @@
 
 <mapper namespace="kr.co.cooks.dao.FreeCommentDao">
 
-	<insert id="freeCommentWrite" parameterType="freecomment">
-		insert into free_comments values(freecomment_seq.NEXTVAL, #{id}, #{fcomment_Content}, sysdate, #{free_Num})
+	<insert id="freeCommentWrite" parameterType="freeCommentVO">
+		insert into free_comments values(freecomment_seq.NEXTVAL, #{id},#{fcomment_Content}, sysdate, #{free_Num})
 	</insert>
 	
-	<select id="freeCommentRead" parameterType="HashMap" resultType="freecomment">
+	<select id="freeCommentRead" parameterType="HashMap" resultType="freeCommentVO">
 		select * from (select rownum rm, human.* from 
-		(select * from free_comments where free_Num=#{free_Num}
-		order by fcomment_Num) human) 
+		(select T1.FCOMMENT_NUM, T1.ID, T1.FCOMMENT_CONTENT, T1.FCOMMENT_DATE, T1.FREE_NUM, T2.NAME
+		from FREE_COMMENTS T1, USERS T2 
+		where FREE_NUM=#{free_Num} and T1.ID=T2.ID
+		order by FCOMMENT_NUM) human) 
 		where rm between 1 and #{endRow}
 	</select>
 </mapper>

@@ -51,7 +51,7 @@
                         <a href="#">맛집</a>
                     </li>
                     <li>
-                        <a href="#">커뮤니티</a>
+                        <a href="FreeList.app?pageNum=1">커뮤니티</a>
                     </li>
                     <li>
                         <a href="#">공지사항</a>

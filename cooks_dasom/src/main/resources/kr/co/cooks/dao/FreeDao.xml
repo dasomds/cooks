@@ -13,8 +13,8 @@
 		(select free_num, id, free_title, free_date, free_hit from f_board order by free_num)human)
 		where rm between #{startRow} and #{endRow}
 	</select>
-	<insert id="freewrite" parameterType="freeVO" >
-		insert into f_board values(fboard_seq.nextval,#{id},#{free_Title},#{free_Content},sysdate,0)
+	<insert id="freewrite" parameterType="HashMap" >
+		insert into f_board values(fboard_seq.nextval,#{userId},#{freeVO.free_Title},#{freeVO.free_Content},sysdate,0)
 	</insert>
 	
 	<select id="freecontent" parameterType="Integer" resultType="freeVO">

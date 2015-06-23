@@ -52,8 +52,12 @@ public class FreeService {
 //		hm.put("pagecode", page.getSb().toString());
 		return hm;
 	}
-	public void freewrite(FreeVO freeVO){
-		freeDao.freewrite(freeVO);
+	public void freewrite(FreeVO freeVO, String userId){
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("freeVO", freeVO);
+		params.put("userId", userId);
+		
+		freeDao.freewrite(params);
 	}
 	
 	public ModelAndView freewriteForm(HttpServletRequest req){

@@ -113,7 +113,7 @@ function getComment(commentPageNum)  {
 				var formatted_date = new Date(entry.fcomment_Date);
 				
 				html += '<div class="row">';
-				html += '<div class="col-md-2 col-sm-3 text-center">' + entry.id + '</div>';
+				html += '<div class="col-md-2 col-sm-3 text-center">' + entry.name + '</div>';
 				html += '<div class="col-md-10 col-sm-9">';
 				html += '<div class="panel" style="background: #F5F5F5">' + entry.fcomment_Content;
 				html += '<div class="row">';
@@ -298,12 +298,12 @@ function addHit() {
 								<textarea class="form-control" id="fcomment_Content" name="fcomment_Content"
 									placeholder="댓글을 입력하세요!"></textarea>
 							</div>
-							<c:if test="${id==null}">
-								<button class="btn btn-primary pull-right" type="button" id="comment_write" disabled="disabled">추가</button>
-							</c:if>
-							<c:if test="${id!=null}">
+<%-- 							<c:if test="${id==null}"> --%>
+<!-- 								<button class="btn btn-primary pull-right" type="button" id="comment_write" disabled="disabled">추가</button> -->
+<%-- 							</c:if> --%>
+<%-- 							<c:if test="${id!=null}"> --%>
 								<button class="btn btn-primary pull-right" type="button" id="comment_write">추가</button>
-							</c:if>
+<%-- 							</c:if> --%>
 							<ul class="list-inline">
 								<li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li>
 								<li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li>

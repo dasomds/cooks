@@ -61,8 +61,9 @@
 
 					<div class="well bs-component">
 
-						<form class="form-horizontal" action="FreeWrite.app"
-							method="post">
+						<form class="form-horizontal" action="FreeWrite.app"method="post">
+						<input type="hidden" name="pageNum" id="pageNum" value="${pageNum}">
+						<input type="hidden" name="userId" value="${loginUser.id}">
 							<div class="form-group">
 								<label for="id">글쓴이 : </label> ${loginUser.name}
 								<hr>
